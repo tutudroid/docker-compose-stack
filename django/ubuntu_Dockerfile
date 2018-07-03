@@ -1,0 +1,11 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get install -y python python-dev gcc --no-install-recommends apt-utils python-pip build-essential curl
+
+RUN pip install --upgrade pip && pip install --upgrade && pip install -U setuptools && pip install uwsgi
+
+RUN apt-get update && apt-get install -y supervisor
+
+COPY ./requirements.txt /tmp/
+
+RUN pip install -r /tmp/requirements.txt

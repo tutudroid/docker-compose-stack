@@ -27,7 +27,7 @@ RUN TEMP_DEB="$(mktemp)" && \
 ENV CLUSTER_NAME pg_cluster
 
 # special repmgr db for cluster info
-ENV REPLICATION_DB replication_db
+ENV REPLICATION_DB replication_db 
 ENV REPLICATION_USER replication_user
 ENV REPLICATION_PASSWORD replication_pass
 ENV REPLICATION_PRIMARY_PORT 5432
@@ -120,6 +120,9 @@ RUN chown -R postgres:postgres /home/postgres
 
 EXPOSE 22
 EXPOSE 5432
+
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 VOLUME /var/lib/postgresql/data
 USER root
